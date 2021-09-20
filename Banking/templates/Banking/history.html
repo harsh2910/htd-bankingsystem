@@ -1,0 +1,33 @@
+{% extends "Banking/layout.html" %}
+
+{% block body %}
+<h1 class="center">Transaction History</h1>
+ <table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Sender</th>
+            <th scope="col">Recipient</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Timestamp</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    {% for item in history %}
+        <tr>
+            <td scope="row">{{item.id}}</td>
+            <td>{{item.sender.name}}</td>
+            <td>{{item.recipient.name}}</td>
+            <td>₹ {{item.amount}}</td>
+            <td>{{item.time}}</td>
+            {% if item.status %}
+                <td class="text-success">Success</td>
+            {% else %}
+                <td class="text-danger">Failed</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+
+</table>
+
+ {% endblock %}

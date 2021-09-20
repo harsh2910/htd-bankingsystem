@@ -1,0 +1,32 @@
+{% extends "Banking/layout.html" %}
+
+{% block body %}
+    {% if errors %}
+        {%for error in errors %}
+            <div class="alert alert-danger" role="alert"><strong>{{error}}</strong></div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="center">Customers</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Current Balance</th>
+            </tr>
+        </thead>
+        {% for customer in customers %}
+            <tr>
+                <td scope="row">{{customer.id}}</td>
+                <td>{{customer.name}}</td>
+                <td>{{customer.email}}</td>
+                <td>{{customer.ballance}}</td>
+                
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

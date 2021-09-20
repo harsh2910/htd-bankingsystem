@@ -1,0 +1,36 @@
+{% extends "Banking/layout.html" %}
+
+{% block body %}
+    {% if errors %}
+        {%for error in errors %}
+            <div class="alert alert-danger" role="alert"><strong>{{error}}</strong></div>
+        {% endfor %}
+    {% endif %}
+    <div id="transfer_money">
+        <h1>Transfer Money</h1>
+        <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_txegv15f.json"  background="transparent"  speed="1"  style="width: 100%; height: auto;"  loop  autoplay></lottie-player>
+        <form id="transfer_form" method="post" action="{% url 'transfer' %}">
+            {% csrf_token %}
+            <div id="transfer_input">
+                <select name="sender">
+                    <option value="" disabled selected hidden>Sender</option>
+                    {% for customer in customers %}
+                        <option style="background: rgb(255, 255, 255);" value="{{ customer.id }}">{{ customer.name }}</option>
+                    {% endfor %}
+                </select><br>
+
+                <select name="recipient">
+                    <option value="" disabled selected hidden>Recipient</option>
+                    {% for customer in customers %}
+                        <option value="{{ customer.id }}">{{ customer.name }}</option>
+                    {% endfor %}
+                </select><br>
+
+                <input type="number" name="amount" min="1" placeholder="Amount" placeholder-color="black"><br>
+
+                <input type="submit">
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
